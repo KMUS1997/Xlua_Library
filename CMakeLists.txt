@@ -185,7 +185,7 @@ if (APPLE)
            ${XLUA_CORE}
            ${THIRDPART_SRC}
         )
-		set_xcode_property (xlua IPHONEOS_DEPLOYMENT_TARGET "7.0" "all")
+		set_xcode_property (xlua IPHONEOS_DEPLOYMENT_TARGET "12.0" "all")
     else ()
         ADD_DEFINITIONS(-DLUA_USE_MACOSX) #osx platform emmylua debugger must have this option or can not load cpath
         if (BUILD_SILICON)
