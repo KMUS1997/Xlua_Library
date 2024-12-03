@@ -1,19 +1,35 @@
-name: Build Android Lua53
+name: Build ALL and Push Artifacts
 
 on:
-  workflow_dispatch:  # 手动触发
-
+  workflow_dispatch:  # 手动触发工作流
 
 jobs:
-  run-shell-script:
-    runs-on: ubuntu-22.04  # Use Ubuntu 22.04 explicitly
+  build-and-push:
+    runs-on: ubuntu-22.04  # 使用 Ubuntu 22.04 显式指定
 
     steps:
       - name: Checkout the repository
         uses: actions/checkout@v2
 
       - name: Set executable permissions for the script
-        run: chmod +x ./make_android_lua53.sh
+        run: chmod +x ./make_android_lua53.sh  # 给构建脚本加上执行权限
 
       - name: Run the shell script
-        run: ./make_android_lua53.sh
+        run: ./make_android_lua53.sh  # 运行你的构建脚本
+
+      - name: Commit and push build artifacts
+        run: |
+          # 假设你生成的文件在当前目录或某个子目录中
+          git add .  # 将所有变更的文件添加到 Git（包括构建生成的文件）
+          
+          # 配置 git 用户信息
+          git config user.name "KMUS1997@163.com"
+          git config user.email "KMUS1997@163.com"
+          
+          # 提交变更
+          git commit -m "Add build artifacts" || echo "No changes to commit"  # 如果没有变化，避免报错
+          
+          # 推送到 GitHub 的 main 分支
+          git push origin main  # 推送到主分支
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # GitHub 会自动提供这个 token 用于认证
