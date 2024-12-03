@@ -1,12 +1,11 @@
-name: Build Android Lua53
+name: Build ALL and Push Artifacts
 
 on:
-  workflow_dispatch:  # 手动触发
-
+  workflow_dispatch:  # 手动触发工作流
 
 jobs:
-  run-shell-script:
-    runs-on: ubuntu-22.04  # Use Ubuntu 22.04 explicitly
+  build-and-push:
+    runs-on: ubuntu-22.04  # 使用 Ubuntu 22.04 显式指定
 
     steps:
       - name: Checkout the repository
@@ -17,3 +16,12 @@ jobs:
 
       - name: Run the shell script
         run: ./make_android_lua53.sh
+
+      - name: List build directory contents
+        run: ls -l ./plugin_lua53/Plugins/Android/libs/  # 列出构建输出目录内容，调试用
+
+      - name: Upload Android plugin directory as artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: android-plugin
+          path: ./plugin_lua53/Plugins/Android/  # 上传整个目录

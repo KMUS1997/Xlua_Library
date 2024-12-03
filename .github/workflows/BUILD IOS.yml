@@ -1,0 +1,27 @@
+name: Build IOS and Push Artifacts
+
+on:
+  workflow_dispatch:  # 手动触发工作流
+
+jobs:
+  build-and-push:
+    runs-on: macos-13
+
+    steps:
+      - name: Checkout the repository
+        uses: actions/checkout@v2
+
+      - name: Set executable permissions for the script
+        run: chmod +x ./make_ios_lua53.sh  # 确保 iOS 构建脚本是可执行的
+
+      - name: Run the shell script
+        run: ./make_ios_lua53.sh  # 运行 iOS 构建脚本
+
+      - name: List build directory contents
+        run: ls -l ./plugin_lua53/Plugins/iOS/  # 列出构建输出目录内容，调试用
+
+      - name: Upload iOS plugin directory as artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: ios-plugin
+          path: ./plugin_lua53/  # 上传 iOS 插件目录
