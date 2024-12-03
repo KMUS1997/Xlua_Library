@@ -21,4 +21,4 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: xlua-shared-library
-          path: ./plugin53/android/libxlua.so  # 根据你的构建路径调整文件路径
+          path:  ./build/libxlua.so  # 确保路径正确，替换为实际构建文件路径
