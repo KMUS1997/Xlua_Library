@@ -1,0 +1,10 @@
+^E:\_ASSETS\XLUALIB\XLUA\BUILD\BUILD32\CMAKEFILES\84F63070BA26F2F8C8A52A6E78E872C7\GENERATE.STAMP.RULE
+setlocal
+"D:\Program Files\CMake\bin\cmake.exe" -SE:/_Assets/XluaLib/xLua/build -BE:/_Assets/XluaLib/xLua/build/build32 --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file E:/_Assets/XluaLib/xLua/build/build32/XLua.sln
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
