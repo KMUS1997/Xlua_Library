@@ -3,9 +3,10 @@ name: Build Android Lua53
 on:
   workflow_dispatch:  # 手动触发
 
+
 jobs:
   run-shell-script:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04  # Use Ubuntu 22.04 explicitly
 
     steps:
       - name: Checkout the repository
