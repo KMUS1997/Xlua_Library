@@ -24,4 +24,4 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: ios-plugin
-          path: ./plugin_lua53/Plugins/iOS/  # 上传 iOS 插件目录
+          path: ./plugin_lua53/  # 上传 iOS 插件目录
