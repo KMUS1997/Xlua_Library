@@ -18,7 +18,7 @@ jobs:
         run: ./make_android_lua53.sh  # 运行你的构建脚本
 
       - name: Upload build artifacts
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: xlua-shared-library
           path: ./plugin53/android/libxlua.so  # 根据你的构建路径调整文件路径
