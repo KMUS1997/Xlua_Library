@@ -5,7 +5,7 @@ on:
 
 jobs:
   build-and-push:
-    runs-on: macos-latest  # 使用 macOS 系统，因为你需要构建 iOS 插件
+    runs-on: macos-13
 
     steps:
       - name: Checkout the repository
