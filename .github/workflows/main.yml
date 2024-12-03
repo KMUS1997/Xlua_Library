@@ -1,0 +1,18 @@
+name: Run Shell Script
+
+on:
+  workflow_dispatch:  # 手动触发
+
+jobs:
+  run-shell-script:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout the repository
+        uses: actions/checkout@v2
+
+      - name: Set executable permissions for the script
+        run: chmod +x ./make_android_lua53.sh
+
+      - name: Run the shell script
+        run: ./make_android_lua53.sh
