@@ -226,21 +226,24 @@ namespace values {
 
 
 	namespace details {
-		rapidjson::Value toValue(lua_State* L, int idx, int depth, Allocator& allocator);
+	    rapidjson::Value toValue(lua_State* L, int idx, int depth, Allocator& allocator);
 	}
-
+	
 	inline rapidjson::Value toValue(lua_State* L, int idx, Allocator& allocator) {
-		return details::toValue(L, idx, 0, allocator);
+	    return details::toValue(L, idx, 0, allocator);
 	}
-
+	
 	inline void toDocument(lua_State* L, int idx, rapidjson::Document* doc) {
-		details::toValue(L, idx, 0, doc->GetAllocator()).Swap(*doc);
+	    // 构造一个新的Value对象，并使用allocator进行分配
+	    rapidjson::Value v = details::toValue(L, idx, 0, doc->GetAllocator());
+	    v.Swap(*doc);  // 使用Swap避免不必要的复制
+	}
+	
+	inline void pushValue(lua_State *L, const rapidjson::Value& v) {
+	    ToLuaHandler handler(L);
+	    v.Accept(handler);  // 通过Accept将数据传递给Lua
 	}
 
-	inline void pushValue(lua_State *L, const rapidjson::Value& v) {
-		ToLuaHandler handler(L);
-		v.Accept(handler);
-	}
 
 
     template<typename Stream>
